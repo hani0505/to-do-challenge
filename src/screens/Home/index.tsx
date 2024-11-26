@@ -1,10 +1,11 @@
-import { View, Text, Image, TextInput, TouchableOpacity, FlatList, Alert } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, FlatList, Alert, ToastAndroid } from "react-native";
 import plus from '../../../assets/plus.png'
 import { styles } from "./styles";
 import Logo from '../../../assets/Logo.png'; // Importe o arquivo SVG corretamente
 import Theme from "../../stylesGlobal/Theme";
 import  {TaskList}  from "../../components/Tasklist";
 import { useEffect, useState } from "react";
+import clipBoard from '../../../assets/Clipboard.png'
 
 export interface ItemProps {
     task: string,
@@ -46,8 +47,10 @@ export function Home() {
 
         setItemList(update)
     }
-    function handleDelete(){
-
+    function handleDelete(item: ItemProps){
+        const newItens = itemList.filter(TaskList => TaskList.task !== item.task)
+        setItemList(newItens)
+        ToastAndroid.show("Tarefa removida", ToastAndroid.SHORT)
     }
 
     return(
@@ -83,8 +86,15 @@ export function Home() {
                             key={item.task}
                             item={item}
                             onCheck={() => handleCheck(item)}
-                            onRemove={handleDelete}
+                            onRemove={() => handleDelete(item)}
                             />
+                        )} 
+                        ListEmptyComponent={()=> (
+                            <View style={styles.emptyContainer}>
+                                <Image source={clipBoard} style= {styles.emptyIco}></Image>
+                                <Text style={styles.textEmpty}>Você ainda não criou nenhuma tarefa?</Text>
+                                <Text style={styles.subtitle}>Crie tarefas e organize seus itens a fazer</Text>
+                            </View>
                         )}
                     />
             </View>
