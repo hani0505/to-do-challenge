@@ -78,6 +78,25 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 12,
         backgroundColor: Theme.colors.Gray400,
         color: Theme.colors.Gray100
+    },
+    emptyContainer:{
+        alignItems: 'center',
+        paddingTop: 48,
+        borderTopColor: Theme.colors.Gray400,
+        borderTopWidth: 1,
+         
+    },
+    emptyIco:{
+        width: 56,
+        height: 56,
+        marginBottom: 16
+    },
+    textEmpty:{
+        fontWeight: 'bold',
+        color: Theme.colors.Gray300
+    },
+    subtitle:{
+        color: Theme.colors.Gray300
     }
 
 })
